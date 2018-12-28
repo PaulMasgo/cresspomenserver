@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 
-
-
 //  aplicación de análisis / x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -13,11 +11,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 //llamando a las rutas 
-app.use(require('./routes/productos'));
-app.use(require('./routes/usuarios'))
+app.use(require('./routes/index'));
 
 //conectandose a la base de datos
-
 mongoose.connect(config.urlDB, { useNewUrlParser: true })
     .then(db => console.log('Estas conectado a la base de datos '))
     .catch(err => console.log('No de conecto'));

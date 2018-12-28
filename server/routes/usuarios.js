@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const Usuario = require('../models/Usuario')
+const Usuario = require('../models/Usuario');
+const { verficartoken, verificarRol } = require('../middlewares/autenticacion')
 const app = express();
 
 app.get('/usuario', (req, res) => {
@@ -54,7 +55,7 @@ app.put('/usuario/:id', (req, res) => {
 
 });
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id', [verficartoken, verificarRol], (req, res) => {
     let id = req.params.id;
 
     Usuario.findByIdAndUpdate(id, { estado: false }, { new: true }, (err, UsuarioBorrado) => {
