@@ -20,5 +20,9 @@ if (config.estado === 'dev') {
     config.urlDB = 'mongodb://admin:continental2019@ds141623.mlab.com:41623/cresspomen'
 }
 
+
+//client id;
+config.clientId = '372675155090-hgttjr3lodmiq3gkn29le31e6emo8mc3.apps.googleusercontent.com';
+
 //exportando configuracui
 module.exports = config;
