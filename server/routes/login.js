@@ -46,7 +46,7 @@ async function verify(token) {
 
 app.post('/google', async(req, res) => {
 
-    let token = req.body.idToken;
+    let token = req.body;
     let googleUser = await verify(token)
         .catch(err => { return res.status(403).json({ ok: false, err }) });
 
@@ -76,9 +76,11 @@ app.post('/google', async(req, res) => {
             usuario.save((err, usuarioDB) => {
                 if (err) {
                     return res.json({ mensaje: 'hubo un error', error: err });
-                };
-                let token = jwt.sign({ usuario: usuarioDB }, config.seed, { expiresIn: config.vencimientoToken });
-                return res.json({ ok: true, usuario: usuarioDB, token });
+                } else {
+                    let token = jwt.sign({ usuario: usuarioDB }, config.seed, { expiresIn: config.vencimientoToken });
+                    return res.json({ ok: true, usuario: usuarioDB, token });
+                }
+
             });
         }
 
